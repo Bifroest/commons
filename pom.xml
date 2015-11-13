@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>profiling-commons</artifactId>
+    <version>26.9.2-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+  <name>profiling-commons</name>
+
+  <parent>
+    <groupId>com.goodgame.profiling</groupId>
+    <artifactId>profiling-base</artifactId>
+    <version>3.0.0</version>
+  </parent>
+
+  <dependencies>
+
+    <!-- ################################################### -->
+    <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20141113</version>
+   </dependency>
+
+
+   <!-- ################################################## -->
+    <dependency>
+            <groupId>org.kohsuke.metainf-services</groupId>
+            <artifactId>metainf-services</artifactId>
+            <version>1.5</version>
+            <optional>true</optional>
+    </dependency>
+
+    <!-- ################################################## -->
+    <dependency>
+        <groupId>com.lmax</groupId>
+        <artifactId>disruptor</artifactId>
+        <version>3.0.1</version>
+    </dependency>
+    <!-- ################################################## -->
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-slf4j-impl</artifactId>
+        <version>2.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-ext</artifactId>
+        <version>1.7.7</version>
+    </dependency>
+    <dependency>
+        <groupId>com.goodgame.profiling</groupId>
+        <artifactId>ggs-juds</artifactId>
+        <version>2.0.10</version>
+    </dependency>
+    <dependency>
+      <groupId>ws.wamp.jawampa</groupId>
+      <artifactId>jawampa</artifactId>
+      <version>0.2.1-SNAPSHOT-16</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+            <omitVisitors>DefaultEncodingDetector</omitVisitors>
+         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+            <compilerArgument>-Xlint:unchecked</compilerArgument>
+            <source>1.8</source>
+            <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+      </plugin>
+      <plugin>
+          <groupId>org.pitest</groupId>
+          <artifactId>pitest-maven</artifactId>
+          <version>1.1.7</version>
+          <configuration>
+              <targetClasses>
+                  <param>com.goodgame.profiling.commons.*</param>
+              </targetClasses>
+              <targetTests>
+                  <param>com.goodgame.profiling.commons.*</param>
+              </targetTests>
+          </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
