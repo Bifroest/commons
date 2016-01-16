@@ -9,21 +9,18 @@ import com.goodgame.profiling.commons.boot.InitD;
 import com.goodgame.profiling.commons.statistics.gathering.StatisticGatherer;
 import com.goodgame.profiling.commons.systems.configuration.EnvironmentWithMutableJSONConfiguration;
 import com.goodgame.profiling.commons.systems.configuration.JSONConfigurationLoader;
-import com.goodgame.profiling.commons.systems.net.wamp.EnvironmentWithMutableWampClients;
 import com.goodgame.profiling.commons.systems.statistics.EnvironmentWithMutableStatisticsGatherer;
 import java.util.HashMap;
 import java.util.Map;
-import ws.wamp.jawampa.WampClient;
 
 public abstract class AbstractCommonEnvironment implements EnvironmentWithConfigPath, EnvironmentWithMutableJSONConfiguration,
-        EnvironmentWithMutableStatisticsGatherer, EnvironmentWithMutableWampClients, EnvironmentWithInit {
+        EnvironmentWithMutableStatisticsGatherer, EnvironmentWithInit {
 
     private final Path configPath;
     private InitD init;
     private JSONObject configuration;
     private JSONConfigurationLoader configLoader;
     private StatisticGatherer statisticGatherer;
-    private Map<String, WampClient> wampClients = new HashMap<String, WampClient>();
     
     public AbstractCommonEnvironment( Path configPath, InitD init ) {
         this.configPath = configPath;
@@ -72,18 +69,5 @@ public abstract class AbstractCommonEnvironment implements EnvironmentWithConfig
     @Override
     public void setStatisticGatherer( StatisticGatherer statisticGatherer ) {
         this.statisticGatherer = statisticGatherer;
-    }
-    
-    @Override
-    public WampClient getWampClientForRealm( String realm ) {
-        return wampClients.get( realm );
-    }
-    
-    @Override
-    public void addWampClient( String realm, WampClient client ) {
-        if ( wampClients.get( realm ) != null ) {
-            throw new IllegalStateException( "Attempting to overwrite wamp client for realm " + realm );
-        }
-        wampClients.put( realm, client );
     }
 }

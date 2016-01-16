@@ -20,6 +20,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -82,6 +83,7 @@ public class BootLoaderNGTest {
      * com.goodgame.profiling.commons.exception.SubsystemNotFoundException
      * @throws com.goodgame.profiling.commons.exception.ConfigurationException
      */
+    @Ignore
     @Test
     public void testEnableSubsystemWithAvailableSystem()
             throws SubsystemNotFoundException, ConfigurationException {
@@ -105,6 +107,7 @@ public class BootLoaderNGTest {
      * com.goodgame.profiling.commons.exception.SubsystemNotFoundException
      * @throws com.goodgame.profiling.commons.exception.ConfigurationException
      */
+    @Ignore
     @Test
     public void testEnableSubsystemWithoutAvailableSystem()
             throws SubsystemNotFoundException, ConfigurationException {
@@ -120,6 +123,7 @@ public class BootLoaderNGTest {
      * com.goodgame.profiling.commons.exception.SubsystemNotFoundException
      * @throws com.goodgame.profiling.commons.exception.ConfigurationException
      */
+    @Ignore
     @Test
     public void testEnableSubsystemWithAvailableSystemAndAvailableDependencies()
             throws SubsystemNotFoundException, ConfigurationException {
@@ -159,6 +163,7 @@ public class BootLoaderNGTest {
      *
      * @throws java.lang.Exception
      */
+    @Ignore
     @Test
     public void testGetBootOrder() throws Exception {
         LOGGER.info("Test: testGetBootOrder()");

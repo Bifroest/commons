@@ -27,7 +27,6 @@ import com.goodgame.profiling.commons.systems.net.jsonserver.CommandMonitor;
 import com.goodgame.profiling.commons.systems.net.socket.CommonServerSocket;
 import com.goodgame.profiling.commons.systems.net.socket.ReadWriteableClientSocket;
 import com.goodgame.profiling.commons.systems.net.socket.ServerSocketHolder;
-import com.goodgame.profiling.commons.systems.net.socket.UnixServerSocket;
 import com.goodgame.profiling.commons.systems.net.throttle.ThrottleControl;
 import com.goodgame.profiling.commons.util.json.JSONUtils;
 
@@ -61,19 +60,7 @@ public class ServerThread<E extends Environment> extends Thread {
             } catch( JSONException e ) {
                 log.error( "Failed to read attribute 'port' from JSONconfigfile: ", e );
             }
-        } else if ( config.getString( "type" ).equals( "unix socket" ) ) {
-            try {
-                String unixSocketPath = config.getString( "unixSocketPath" ) + "/" + name + "Socket";
-                int connectionBacklog = config.getInt( "connectionBacklog" );
-                String judsLibraryPath = config.getString( "judsLibraryPath" );
-                log.info( "Create UnixServerSocket with unixSocketPath '{}', connectionBacklog {} and judsLibraryPath '{}'",
-                        Objects.toString( unixSocketPath ), Objects.toString( connectionBacklog ), Objects.toString( judsLibraryPath ) );
-                this.server = new UnixServerSocket( unixSocketPath, connectionBacklog, judsLibraryPath, config.getJSONObject( "permissions" ) );
-            } catch( JSONException e ) {
-                log.error( "Failed to read attributes from JSONconfigfile: ", e );
-            }
         }
-
         this.maximumPoolSize = config.getInt( "poolsize" );
         ThreadFactory threads = new BasicThreadFactory.Builder().namingPattern( name + "-%d" ).build();
         this.queue = new LinkedBlockingQueue<Runnable>();
