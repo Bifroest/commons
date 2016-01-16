@@ -109,6 +109,14 @@
               </targetTests>
           </configuration>
       </plugin>
+      <plugin>
+          <groupId>org.eluder.coveralls</groupId>
+          <artifactId>coveralls-maven-plugin</artifactId>
+          <version>4.1.0</version>
+          <configuration>
+              <repoToken>VHHqpFGHt2SIoxsesFaRPzON3R2zs6VkV</repoToken>
+          </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
