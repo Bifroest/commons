@@ -1,8 +1,6 @@
 # Profiling Commons
 
-[![Build Status](https://travis-ci.org/Bifroest/commons.svg?branch=master)](https://travis-ci.org/Bifroest/commons)
-
-[![Coverage Status](https://coveralls.io/repos/Bifroest/commons/badge.svg?branch=master&service=github)](https://coveralls.io/github/Bifroest/commons?branch=master)
+[![Build Status](https://travis-ci.org/Bifroest/commons.svg?branch=master)](https://travis-ci.org/Bifroest/commons) [![Coverage Status](https://coveralls.io/repos/Bifroest/commons/badge.svg?branch=master&service=github)](https://coveralls.io/github/Bifroest/commons?branch=master)
 
 ## Systems
 
