@@ -25,7 +25,7 @@ public final class Interval {
     }
 
     public boolean intersects( Interval interval ) {
-        return ( interval.start < end || interval.end > start );
+        return this.contains(interval.start) || this.contains(interval.end);
     }
 
     @Override
