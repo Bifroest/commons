@@ -30,8 +30,8 @@ import org.slf4j.Logger;
 import io.bifroest.commons.boot.interfaces.Subsystem;
 import io.bifroest.commons.exception.SubsystemNotFoundException;
 import io.bifroest.commons.logging.LogService;
-import io.bifroest.commons.systems.common.EnvironmentWithConfigPath;
-import io.bifroest.commons.systems.configuration.EnvironmentWithMutableJSONConfiguration;
+import io.bifroest.commons.environment.EnvironmentWithConfigPath;
+import io.bifroest.commons.configuration.EnvironmentWithMutableJSONConfiguration;
 
 public class BootLoaderNGTest {
 

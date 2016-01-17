@@ -45,10 +45,10 @@ import io.bifroest.commons.boot.interfaces.Subsystem;
 import io.bifroest.commons.exception.CircularDependencyException;
 import io.bifroest.commons.exception.SubsystemNotFoundException;
 import io.bifroest.commons.logging.LogService;
-import io.bifroest.commons.systems.common.EnvironmentWithConfigPath;
-import io.bifroest.commons.systems.configuration.ActualJSONConfigurationLoader;
-import io.bifroest.commons.systems.configuration.ConfigurationObserver;
-import io.bifroest.commons.systems.configuration.EnvironmentWithMutableJSONConfiguration;
+import io.bifroest.commons.environment.EnvironmentWithConfigPath;
+import io.bifroest.commons.configuration.ActualJSONConfigurationLoader;
+import io.bifroest.commons.configuration.ConfigurationObserver;
+import io.bifroest.commons.configuration.EnvironmentWithMutableJSONConfiguration;
 import io.bifroest.commons.util.panic.PanicAnnouncement;
 import io.bifroest.commons.util.panic.ProfilingPanic;
 

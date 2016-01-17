@@ -1,4 +1,4 @@
-package io.bifroest.commons.util.panic;
+package io.bifroest.commons.net.jsonserver.commands;
 
 import java.util.Collections;
 import java.util.List;
@@ -7,14 +7,14 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 import org.kohsuke.MetaInfServices;
 
-import io.bifroest.commons.boot.interfaces.Environment;
+import io.bifroest.commons.configuration.EnvironmentWithJSONConfiguration;
 import io.bifroest.commons.net.jsonserver.Command;
 
 @MetaInfServices
-public class PanicCommand<E extends Environment> implements Command<E> {
+public class GetConfigurationCommand< E extends EnvironmentWithJSONConfiguration > implements Command<E> {
     @Override
     public String getJSONCommand() {
-        return "panic";
+        return "get-configuration";
     }
 
     @Override
@@ -24,8 +24,7 @@ public class PanicCommand<E extends Environment> implements Command<E> {
 
     @Override
     public JSONObject execute( JSONObject input, E environment ) {
-        ProfilingPanic.INSTANCE.panic();
-
-        return new JSONObject();
+        return environment.getConfiguration();
     }
+
 }

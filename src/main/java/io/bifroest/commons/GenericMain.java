@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import io.bifroest.commons.boot.BootLoaderNG;
 import io.bifroest.commons.boot.InitD;
 import io.bifroest.commons.logging.LogService;
-import io.bifroest.commons.systems.common.AbstractCommonEnvironment;
+import io.bifroest.commons.environment.AbstractCommonEnvironment;
 
 import java.nio.file.Paths;
 import java.nio.file.Path;
