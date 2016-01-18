@@ -25,7 +25,10 @@ public final class Interval {
     }
 
     public boolean intersects( Interval interval ) {
-        return this.contains(interval.start) || this.contains(interval.end);
+        if ( interval.start() == interval.end() ) {
+            throw new IllegalArgumentException("Interval.intersects is broken for intervals with start == end and may falsly return true");
+        }
+        return this.contains(interval.start) || this.contains(interval.end - 1);
     }
 
     @Override

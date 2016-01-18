@@ -60,6 +60,20 @@ public final class IntervalTest {
 
         assertThat(earlierInterval.intersects(laterInterval), is(false));
     }
+    
+    @Test
+    public void testIntersectIsSymmetricForDisjointIntervals() {
+        long startOfFirst = 5;
+        long endOfFirst = 10;
+
+        long startOfSecond = endOfFirst; // endOfFirst is NOT part of the first interval
+        long endOfSecond = 15;
+
+        Interval earlierInterval = new Interval(startOfFirst, endOfFirst);
+        Interval laterInterval = new Interval(startOfSecond, endOfSecond);
+
+        assertThat(laterInterval.intersects(earlierInterval), is(false));
+    }
 
     @Test
     public void testIntersectIsFalseForFarDisjointIntervals() {
@@ -99,6 +113,24 @@ public final class IntervalTest {
         Interval secondInterval = new Interval(someStart, someEnd);
 
         assertThat(firstInterval.hashCode() == secondInterval.hashCode(), is(true));
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testIntersectWithEmptyIntervalThrows() {
+        // This test will look kinda weird.
+        // This test exists because intersects is broken for empty 
+        // intervals with start == end. Overall, intervalls with 
+        // start == end are kinda weird and I'd rather have the
+        // constructor throw than intersect throw, but until
+        // I have more tests, I'm not confident to add that behavior
+        // there
+        long someStart = 10;
+        long someEnd = 20;
+        
+        Interval nonEmptyInterval = new Interval(someStart, someEnd);
+        Interval emptyInterval = new Interval(0, 0);
+        
+        nonEmptyInterval.intersects( emptyInterval );
     }
 
     @Test
