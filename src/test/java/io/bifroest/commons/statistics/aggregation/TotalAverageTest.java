@@ -1,26 +1,28 @@
 package io.bifroest.commons.statistics.aggregation;
 
-import io.bifroest.commons.statistics.aggregation.TotalAverageAggregation;
-import static org.junit.Assert.assertEquals;
+import static io.bifroest.commons.statistics.aggregation.AggregationMatcherBuilder.aggregatesValues;
+
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
 public class TotalAverageTest {
-
-	private static final double DELTA = 0.01;
-
-	@Test
-	public void testConsumeValueAverages() {
-		TotalAverageAggregation subject = new TotalAverageAggregation();
-		assertEquals( 0, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 9 );
-		assertEquals( 9, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 1 );
-		assertEquals( 5, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 2 );
-		assertEquals( 4, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 4 );
-		assertEquals( 4, subject.getAggregatedValue(), DELTA );
-	}
-
+        @Test
+        public void testConsumeValue() {
+            assertThat(new TotalAverageAggregation(), aggregatesValues(9, 1, 2, 4, 4).into(4));
+        }
+        
+        @Test
+        public void testNoValues() {
+            assertThat(new TotalAverageAggregation(), aggregatesValues().into(0));
+        }
+        
+        @Test
+        public void testReset() {
+            TotalAverageAggregation subject = new TotalAverageAggregation();
+            
+            assertThat(subject, aggregatesValues(9, 1, 2).into(4));
+            subject.reset();
+            assertThat(subject, aggregatesValues(1, 1, 1).into(1));
+        }
 }
