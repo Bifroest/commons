@@ -1,29 +1,41 @@
 package io.bifroest.commons.statistics.aggregation;
 
+import static io.bifroest.commons.statistics.aggregation.AggregationMatcherBuilder.aggregatesNoValues;
+import static io.bifroest.commons.statistics.aggregation.AggregationMatcherBuilder.aggregatesValues;
+
 import io.bifroest.commons.statistics.aggregation.WindowAverageAggregation;
 import io.bifroest.commons.statistics.aggregation.ValueAggregation;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
 public class WindowAverageTest {
 
-	private static final double DELTA = 0.01;
-
-	@Test
-	public void testConsumeValue() {
-		ValueAggregation subject = new WindowAverageAggregation( 3 );
-		assertEquals( 0, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 100 );
-		assertEquals( 100, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 200 );
-		assertEquals( 150, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 100 );
-		assertEquals( 133.33, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 0 );
-		assertEquals( 100, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 200 );
-		assertEquals( 100, subject.getAggregatedValue(), DELTA );
-	}
-
+        @Test
+        public void testLessValuesThanWindowSize() {
+            ValueAggregation subject = new WindowAverageAggregation(3);
+            assertThat(subject, aggregatesValues(16, 8).into(12));
+        }
+        
+        @Test
+        public void testMoreValuesThanWindowSize() {
+            ValueAggregation subject = new WindowAverageAggregation(3);
+            assertThat(subject, aggregatesValues(4, 10, 10, 10).into(10));
+        }
+        
+        @Test
+        public void testNoAggregation() {
+            ValueAggregation subject = new WindowAverageAggregation(3);
+            assertThat(subject, aggregatesNoValues().into(0));
+        }
+        
+        @Test
+        public void testReset() {
+            ValueAggregation subject = new WindowAverageAggregation(3);
+            assertThat(subject, aggregatesValues(10, 10).into(10));
+            subject.reset();
+            assertThat(subject, aggregatesValues(4, 4, 4).into(4));
+        }
 }
