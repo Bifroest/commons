@@ -15,6 +15,10 @@ public class AggregationMatcherBuilder {
         return new AggregationMatcherBuilder(values);
     }
     
+    public static AggregationMatcherBuilder aggregatesNoValues() {
+        return new AggregationMatcherBuilder(new double[0]);
+    }
+    
     public Matcher<ValueAggregation> into(double expectedValue) {
         return new AggregationHamcrestMatcher(inputValues, expectedValue );
     }

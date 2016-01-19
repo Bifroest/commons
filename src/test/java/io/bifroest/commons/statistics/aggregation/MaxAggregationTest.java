@@ -1,5 +1,6 @@
 package io.bifroest.commons.statistics.aggregation;
 
+import static io.bifroest.commons.statistics.aggregation.AggregationMatcherBuilder.aggregatesNoValues;
 import static io.bifroest.commons.statistics.aggregation.AggregationMatcherBuilder.aggregatesValues;
 
 import static org.junit.Assert.assertThat;
@@ -14,7 +15,7 @@ public class MaxAggregationTest {
         
         @Test
         public void testZeroValueAggregation() {
-            assertThat(new MaxAggregation(), aggregatesValues().into(Double.MIN_VALUE));
+            assertThat(new MaxAggregation(), aggregatesNoValues().into(Double.MIN_VALUE));
         }
         
         @Test

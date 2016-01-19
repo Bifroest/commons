@@ -1,5 +1,6 @@
 package io.bifroest.commons.statistics.aggregation;
 
+import static io.bifroest.commons.statistics.aggregation.AggregationMatcherBuilder.aggregatesNoValues;
 import static io.bifroest.commons.statistics.aggregation.AggregationMatcherBuilder.aggregatesValues;
 
 import static org.junit.Assert.assertThat;
@@ -14,7 +15,7 @@ public class TotalAverageTest {
         
         @Test
         public void testNoValues() {
-            assertThat(new TotalAverageAggregation(), aggregatesValues().into(0));
+            assertThat(new TotalAverageAggregation(), aggregatesNoValues().into(0));
         }
         
         @Test
