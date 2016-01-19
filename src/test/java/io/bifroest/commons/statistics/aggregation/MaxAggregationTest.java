@@ -1,26 +1,30 @@
 package io.bifroest.commons.statistics.aggregation;
 
-import io.bifroest.commons.statistics.aggregation.MaxAggregation;
-import io.bifroest.commons.statistics.aggregation.ValueAggregation;
-import static org.junit.Assert.assertEquals;
+import static io.bifroest.commons.statistics.aggregation.AggregationMatcherBuilder.aggregatesValues;
+
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
 public class MaxAggregationTest {
-
-	private static final double DELTA = 0.1;
-
-	@Test
-	public void checkValueAggregation() {
-		ValueAggregation subject = new MaxAggregation();
-
-		assertEquals( 0, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 10 );
-		assertEquals( 10, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 20 );
-		assertEquals( 20, subject.getAggregatedValue(), DELTA );
-		subject.consumeValue( 15 );
-		assertEquals( 20, subject.getAggregatedValue(), DELTA );
-	}
-
+        @Test
+        public void testValueAggregation() {
+            assertThat(new MaxAggregation(), aggregatesValues(1, 10, 20, 15).into(20));
+        }
+        
+        @Test
+        public void testZeroValueAggregation() {
+            assertThat(new MaxAggregation(), aggregatesValues().into(Double.MIN_VALUE));
+        }
+        
+        @Test
+        public void testReset() {
+            MaxAggregation anyMaxAggregation = new MaxAggregation();
+            
+            assertThat(anyMaxAggregation, aggregatesValues(1, 20, 3).into(20));
+            
+            anyMaxAggregation.reset();
+            
+            assertThat(anyMaxAggregation, aggregatesValues(3, 4, 5).into(5));
+        }
 }
